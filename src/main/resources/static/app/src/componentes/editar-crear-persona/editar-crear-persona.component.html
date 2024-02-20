@@ -1,0 +1,88 @@
+<div class="row">
+    <div style="text-align: center;">
+        <h2 class="head-title">{{ accion }} Persona</h2>
+    </div>
+</div>
+<div class="row" style=" display: flex; justify-content: center;">
+    <div class="col-lg-4" style="width: 63%;" >
+        <form [formGroup]="myForm" autocomplete="off">
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Nombre </mat-label>
+                    <input matInput formControlName="perNombre" >
+                </mat-form-field>
+                <div *ngIf="myForm.get('perNombre')?.hasError('required') && myForm.get('perNombre')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+                <div *ngIf="myForm.get('perNombre')?.hasError('maxlength') && myForm.get('perNombre')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">El campo debe tener como maximo <strong> 20 caracteres</strong></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="perApellido">
+                </mat-form-field>
+                <div *ngIf="myForm.get('perApellido')?.hasError('required') && myForm.get('perApellido')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Fecha Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="perFechaNacimiento">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="myForm.get('perFechaNacimiento')?.hasError('required') && myForm.get('perFechaNacimiento')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Numero Documento</mat-label>
+                    <input matInput formControlName="perNumeroDocumento">
+                </mat-form-field>
+                <div *ngIf="myForm.get('perNumeroDocumento')?.hasError('required') && myForm.get('perNumeroDocumento')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <mat-form-field class="example-container">
+                    <mat-label>Tipo documento</mat-label>
+                    <mat-select formControlName="perTipoDocumento">
+                        <mat-option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento">
+                            {{ tipoDocumento }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="myForm.get('perTipoDocumento')?.hasError('required') && myForm.get('perTipoDocumento')?.touched"
+                    style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="col-lg-12"  style=" display: flex; justify-content: center;">
+                <button mat-raised-button color="warn" mat-dialog-close routerLink="/" type="button">Cancelar</button>
+
+                <button mat-raised-button color="primary" style="margin-left: 10px;"
+                    (click)="guardarPersona()" [disabled]="myForm.invalid">Aceptar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 offset-lg-2">
+    </div>
+</div>
